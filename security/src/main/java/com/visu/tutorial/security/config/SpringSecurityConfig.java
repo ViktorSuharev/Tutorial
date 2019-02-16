@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import com.visu.tutorial.security.model.User;
-import com.visu.tutorial.security.service.UserDetailsServiceImpl;
+import com.visu.tutorial.security.service.LoginServiceImpl;
 
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -16,7 +16,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private AccessDeniedHandler accessDeniedHandler;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private LoginServiceImpl userDetailsService;
 
     // создаем пользоватлелей, admin и user
     @Autowired

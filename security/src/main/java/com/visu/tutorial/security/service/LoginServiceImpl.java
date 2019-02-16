@@ -10,12 +10,12 @@ import com.visu.tutorial.security.dao.UserDao;
 import com.visu.tutorial.security.model.User;
 
 @Component
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class LoginServiceImpl implements UserDetailsService {
 
     private final UserDao userDao;
 
     @Autowired
-    public UserDetailsServiceImpl(UserDao userDao) {
+    public LoginServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
