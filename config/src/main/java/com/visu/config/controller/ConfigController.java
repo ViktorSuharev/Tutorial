@@ -1,6 +1,6 @@
 package com.visu.config.controller;
 
-import com.visu.config.service.Service;
+import com.visu.config.service.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,22 +12,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/config")
 public class ConfigController {
 
-    private Service service;
+    private ConfigurationService configurationService;
 
     @Autowired
-    public ConfigController(Service service) {
-        this.service = service;
+    public ConfigController(ConfigurationService configurationService) {
+        this.configurationService = configurationService;
     }
 
     @GetMapping("/lastupd")
     public ResponseEntity getLastUpdate() {
-        String lastUpdate = service.getLastUpdate();
+        String lastUpdate = configurationService.getLastUpdate();
         return ResponseEntity.ok().body(lastUpdate);
     }
 
     @PostMapping("/update")
     public ResponseEntity update() {
-        String message = service.update() ? "Successfully updated" : "Update failed";
+        String message = configurationService.update() ? "Successfully updated" : "Update failed";
+        configurationService.getSomeConfiguration();
         return ResponseEntity.ok().body(message);
     }
 }
