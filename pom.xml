@@ -24,7 +24,6 @@
 	</properties>
 
 	<modules>
-		<module>ui</module>
 		<module>config</module>
 		<module>security</module>
 		<module>persistence</module>
