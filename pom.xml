@@ -27,5 +27,6 @@
 		<module>config</module>
 		<module>security</module>
 		<module>persistence</module>
+		<module>concurrency</module>
 	</modules>
 </project>
