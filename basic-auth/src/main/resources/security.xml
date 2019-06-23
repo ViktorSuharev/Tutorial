@@ -6,15 +6,19 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
+    <http pattern="/public/**" security="none"/>
+
     <http auto-config="true">
-        <intercept-url pattern="/rest/**" access="ROLE_USER" />
+        <intercept-url pattern="/private/read/**" access="ROLE_READ" />
+        <intercept-url pattern="/private/exec/**" access="ROLE_EXEC" />
         <logout/>
     </http>
 
     <authentication-manager>
         <authentication-provider>
             <user-service >
-                <user name="user" password="pass" authorities="ROLE_USER" />
+                <user name="read" password="readPass" authorities="ROLE_READ" />
+                <user name="exec" password="execPass" authorities="ROLE_EXEC" />
             </user-service>
         </authentication-provider>
     </authentication-manager>

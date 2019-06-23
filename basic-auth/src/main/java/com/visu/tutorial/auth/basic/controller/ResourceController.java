@@ -4,10 +4,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/rest/api")public class ResourceController {
+public class ResourceController {
 
-    @RequestMapping
-    public Object getInfo() {
-        return "success";
+    @RequestMapping("/public/some")
+    public Object getPublic() {
+        return "public";
+    }
+
+    @RequestMapping("/private/read/some")
+    public Object getRead() {
+        return "read";
+    }
+
+    @RequestMapping("/private/exec/some")
+    public Object getExec() {
+        return "exec";
     }
 }
