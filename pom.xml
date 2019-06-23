@@ -28,5 +28,6 @@
 		<module>security</module>
 		<module>persistence</module>
 		<module>concurrency</module>
-	</modules>
+        <module>basic-auth</module>
+    </modules>
 </project>

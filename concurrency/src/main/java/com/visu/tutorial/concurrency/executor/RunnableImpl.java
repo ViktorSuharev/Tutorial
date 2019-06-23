@@ -1,15 +1,41 @@
 package com.visu.tutorial.concurrency.executor;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class RunnableImpl implements Runnable {
 
-    private AtomicInteger counter = new AtomicInteger(0);
+    private ReadWriteLock lock = new ReentrantReadWriteLock();
+    private int counter = 0;
+
+    public void increment() {
+        try {
+            while (true) {
+                if (lock.writeLock().tryLock()) {
+                    counter++;
+                    break;
+                }
+            }
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
 
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName() + " here. Counter is " + counter.getAndIncrement());
+        increment();
+        System.out.println(Thread.currentThread().getName() + " here. Counter is " + getCounter());
+    }
 
-        try { Thread.currentThread().sleep(2000L); } catch (Exception e) {}
+    public int getCounter() {
+        try {
+            if (lock.readLock().tryLock()) {
+                return counter;
+            }
+        } finally {
+            lock.readLock().unlock();
+        }
+
+        return -1;
     }
 }
